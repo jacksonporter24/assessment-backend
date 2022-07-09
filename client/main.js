@@ -1,10 +1,10 @@
-//axios request for Compliment Button
-
+//THIS IS THE GETTING OF ELEMENTS
 const complimentBtn = document.getElementById("complimentButton")
-const postInput = document.querySelector("#post-input");
-const putInput = document.querySelector("#put-input");
-const putLocation = document.querySelector("#location");
+const input = document.querySelector("#input");
+const goalLocation = document.querySelector("#goalLocation");
 
+//axios request for Compliment Button
+//GET COMPLEMENT
 const getCompliment = () => {
     axios.get("http://localhost:4000/api/compliment/")
         .then(res => {
@@ -27,14 +27,15 @@ const getFortune = () => {
 };
 
 fortuneBtn.addEventListener('click', getFortune)
-const postButton = document.getElementById("postButton")
 
 //POST REQUEST
+const postButton = document.getElementById("postButton")
+
 const postGoal = () => {
     let goalObj = {
-        newGoal: postInput.value 
+        newGoal: input.value 
     }
-    console.log("geeze")
+    console.log("post goal")
     axios.post(`http://localhost:4000/api/post/`, goalObj )
         .then((res, err) => {
             console.log(res.data);
@@ -44,31 +45,28 @@ const postGoal = () => {
                 document.body.append(newElement)
         })
 }
-
-
 postButton.addEventListener("click", postGoal);
 
 
-
+//PUT REQUEST
 const putButton = document.getElementById("putButton")
 
-//PUT REQUEST
 const putGoal = () => {
     let putObj = {
-        replaceGoal: putInput.value,
-        locationReplace: putLocation.value 
+        replaceGoal: input.value,
+        locationReplace: goalLocation.value 
     }
     console.log("put goal hit")
     axios.put(`http://localhost:4000/api/put/`, putObj )
         .then((res, err) => {
             console.log(res.data);
-            let location = res.data.putLocationGoalReplace
+            let replacedLocation = res.data.putLocationGoalReplace
             let replacementGoal = res.data.putGoalReplacement
-            let element = document.getElementById(location)
+            let element = document.getElementById(replacedLocation)
             console.log(element)
             if (element === null){
                 let newElement = document.createElement('h2')
-                newElement.setAttribute("id",location)
+                newElement.setAttribute("id",replacedLocation)
                 newElement.innerHTML = replacementGoal
                 document.body.append(newElement)
             }
@@ -78,5 +76,24 @@ const putGoal = () => {
         })
 }
 
-
 putButton.addEventListener("click", putGoal);
+
+//DELETE REQUEST
+
+const deleteButton = document.getElementById("deleteButton")
+
+const deleteGoal = () => {
+    console.log("delete button hit")
+    axios.delete(`http://localhost:4000/api/delete/`)
+        .then((res, err) => {
+            console.log(res.data);
+            let itemsToDelete = res.data
+            for (let index = 0; index < itemsToDelete; index++) {
+                let element = document.getElementById(index)
+                if (element != null){
+                    element.remove()
+                }
+            }
+        })
+}
+deleteButton.addEventListener("click", deleteGoal);

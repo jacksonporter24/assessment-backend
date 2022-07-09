@@ -1,5 +1,5 @@
 let globalId = 4;
-const listOfGoals = [];
+let listOfGoals = [];
 
 module.exports = {
 
@@ -54,7 +54,13 @@ module.exports = {
 
         }
         res.status(200).send(goalReplacement2)
+    },
+
+    deleteGoal: (req, res) => {
+        console.log("this is in the controller for delete");
+        let itemsToDelete = listOfGoals.length
+        console.log(itemsToDelete)
+        listOfGoals = []
+        res.status(200).send(itemsToDelete + "")
     }
-
-
 }

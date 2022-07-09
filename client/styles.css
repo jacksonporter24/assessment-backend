@@ -1,0 +1,19 @@
+#complimentButton {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+
+
+  /* <button id="complimentButton">Get a compliment</button>
+    <button id="fortuneButton">Get a fortune</button>
+    <button id="postButton">Post Your Goal!</button>
+    <button id="putButton">Put Goal In Location</button>
+    <button id="deleteButton">Delete Goal In Location</button>
+    <input id="input" placeholder="Write goal HERE"/>
+    <input id="goalLocation" placeholder="Write Location"/> */
